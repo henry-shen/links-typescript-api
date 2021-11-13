@@ -26,6 +26,7 @@ declare module 'strummer' {
   export function isoDate (options?: object): IMatcher
   export function array (options?: object): IMatcher
   export function uuid (options?: object): IMatcher
+  export function url (options?: object): IMatcher
   export function optional (matcher: IMatcher): IMatcher
   export function oneOf (matcher: IMatcher[]): IMatcher
   export function createMatcher ({ match }: { match: (path: string, value: any) => string | null }): any

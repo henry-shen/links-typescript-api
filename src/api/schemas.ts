@@ -8,8 +8,10 @@ const fetchLinkSchema = {
 
 const createLinkSchema = {
   body: s.objectWithOnly({
-    name: s.string(),
-    link: s.string()
+    name: s.string({
+      max: 144
+    }),
+    link: s.url({})
   })
 }
 
