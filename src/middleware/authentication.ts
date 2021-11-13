@@ -1,14 +1,16 @@
 import { Request, Response } from 'express'
 import { authenticateUser } from '../queries/users'
+import { errors } from './errorHandler'
 
 export default async (req: Request, res: Response, next: Function) => {
-  // make authenticate path public
-  // if (req.path === '/') {
-  //   next()
-  // }
+  // make base path public
+  if (req.path === '/') {
+    return next()
+  }
 
   // check for basic auth header
   if (req.headers.authorization === undefined || !req.headers.authorization.includes('Basic ')) {
+    // throw new errors.UnauthorizedError('Missing ')
     return res.status(401).json({
       status: 401,
       message: 'Missing Authorization Header'
@@ -32,5 +34,5 @@ export default async (req: Request, res: Response, next: Function) => {
     id: user.id
   }
 
-  next()
+  return next()
 }
