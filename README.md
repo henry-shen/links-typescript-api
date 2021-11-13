@@ -1,8 +1,4 @@
-<p align="center">
-  <img src="https://github.com/blstrco/linktr.ee-backend-assessment/raw/master/Screen%20Shot%202019-07-08%20at%202.09.47%20pm.png">
-</p>
-
-![alt text](https://github.com/henry-shen/typescript-api/blob/main/image.png?raw=true)
+![alt text](https://github.com/henry-shen/typescript-api/blob/main/misc/image.png?raw=true)
 
 # The Problem
 We have three new link types for our users.

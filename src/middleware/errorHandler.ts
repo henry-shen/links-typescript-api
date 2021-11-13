@@ -1,14 +1,16 @@
-import { Request, Response, ErrorRequestHandler } from 'express'
+import { Request, Response } from 'express'
 
 interface Error {
-    message?: string
-    details?: []
+  message?: string
+  details?: []
 }
 
 export default (err: Error, req: Request, res: Response, next: Function) => {
-    if (err) res.status(400).json({
-        status: 400,
-        message: err.message,
-        errors: err.details
+  if (err !== undefined) {
+    res.status(400).json({
+      status: 400,
+      message: err.message,
+      errors: err.details
     })
+  }
 }

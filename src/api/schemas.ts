@@ -1,23 +1,18 @@
 import * as s from 'strummer'
 
 const fetchLinkSchema = {
-    params: s.objectWithOnly({
-        id: s.string()
-    })
-    // body: s({ id: 'uuid', name: 'string', age: 'number' })
+  params: s.objectWithOnly({
+    id: s.string()
+  })
 }
 
 const createLinkSchema = {
-    params: s.objectWithOnly({
-        id: s.string()
-    }),
-    body: s.objectWithOnly({
-        type: s.string()
-
-    })
-    // body: s({ id: 'uuid', name: 'string', age: 'number' })
+  body: s.objectWithOnly({
+    name: s.string(),
+    link: s.string()
+  })
 }
 
 export {
-    fetchLinkSchema
+  fetchLinkSchema, createLinkSchema
 }

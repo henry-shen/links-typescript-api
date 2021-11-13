@@ -1,0 +1,16 @@
+#! /bin/bash
+
+if [ -z "$DB" ]
+  then
+    DB="links"
+fi
+
+if [ -z "$HOST" ]
+  then
+    HOST="127.0.0.1"
+fi
+
+PORT=${PGPORT:-5432}
+
+echo "DROP DATABASE IF EXISTS $DB"
+psql -p $PORT -h ${HOST} -c "DROP DATABASE IF EXISTS $DB"

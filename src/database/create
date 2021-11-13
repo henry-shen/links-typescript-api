@@ -1,0 +1,18 @@
+#! /bin/bash
+
+dir=$(dirname "$0")
+
+if [ -z "$DB" ]
+  then
+    DB="links"
+fi
+
+if [ -z "$HOST" ]
+  then
+    HOST="127.0.0.1"
+fi
+
+PORT=${PGPORT:-5432}
+
+echo "CREATE DATABASE $DB"
+psql -p $PORT -h ${HOST} -c "CREATE DATABASE $DB"

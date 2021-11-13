@@ -1,20 +1,13 @@
-import express, { Request, Response, NextFunction } from "express";
-import { fetchlinkCtrl } from "./controller";
-const sware = require('strummer-middleware');
+import express from 'express'
+import { fetchLinkCtrl, createLinkCtrl } from './controller'
 
-import requestValidator from "../middleware/strummer"
-import { fetchLinkSchema } from "./schemas";
+import requestValidator from '../middleware/strummer'
+import { createLinkSchema, fetchLinkSchema } from './schemas'
 
-const router = express.Router();
+const router = express.Router()
 
-// const validator = (req: Request, res: Response, next: NextFunction) => {
-//     next()
-// }
+// router.get('/', (req, res) => res.send('Express + TypeScript Server'))
+router.get('/link/:id', [requestValidator(fetchLinkSchema), fetchLinkCtrl])
+router.post('/link', [requestValidator(createLinkSchema), createLinkCtrl])
 
-
-router.get('/link/:id', [requestValidator(fetchLinkSchema), fetchlinkCtrl]);
-router.post('/link', );
-
-
-
-export default router;
+export default router

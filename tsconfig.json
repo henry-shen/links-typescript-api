@@ -9,10 +9,19 @@
     "typeRoots": [
       "./node_modules/@types",
       "./src/types",
+      "./src/types/strummer"
     ],
     "traceResolution": false,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true
-  }
+  },
+  "exclude": [
+    "build/**/*",
+    "**/*.test.ts",
+    "test/**/*"
+  ],
+  "files": [
+    "./src/types/index.d.ts"
+  ]
 }
