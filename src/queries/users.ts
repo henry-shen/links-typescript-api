@@ -1,9 +1,13 @@
 import { User } from '../database/entities/user'
 import { getRepository } from 'typeorm'
 
-const findUser = async (id: string) => {
+const fetchUserLinks = async (username: string) => {
   const userRepository = getRepository(User)
-  return await userRepository.findOne(id)
+  return await userRepository.findOne({
+    where: {
+      username: username
+    }
+  })
 }
 
 const authenticateUser = async (username: string, password: string) => {
@@ -16,4 +20,4 @@ const authenticateUser = async (username: string, password: string) => {
   })
 }
 
-export { findUser, authenticateUser }
+export { fetchUserLinks, authenticateUser }

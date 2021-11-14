@@ -1,20 +1,49 @@
 import * as s from 'strummer'
 
-const fetchLinkSchema = {
+const fetchLinktreeSchema = {
   params: s.objectWithOnly({
-    id: s.string()
+    username: s.string()
   })
 }
 
-const createLinkSchema = {
+const createClassicLinkSchema = {
   body: s.objectWithOnly({
     name: s.string({
       max: 144
     }),
-    link: s.url({})
+    data: s.url({})
+  })
+}
+
+const createShowsLinkSchema = {
+  body: s.objectWithOnly({
+    name: s.string({
+      max: 144
+    }),
+    data: s.array({
+      of: s.objectWithOnly({
+        date: s.isoDate({ time: false }),
+        venue: s.string(),
+        available: s.string()
+      })
+    })
+  })
+}
+
+const createMusicPlayerSchema = {
+  body: s.objectWithOnly({
+    name: s.string({
+      max: 144
+    }),
+    data: s.array({
+      of: s.objectWithOnly({
+        platform: s.string(),
+        url: s.url({})
+      })
+    })
   })
 }
 
 export {
-  fetchLinkSchema, createLinkSchema
+  fetchLinktreeSchema, createClassicLinkSchema, createShowsLinkSchema, createMusicPlayerSchema
 }

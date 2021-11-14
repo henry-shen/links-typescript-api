@@ -3,6 +3,7 @@ import {
   PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn
 } from 'typeorm'
 import { User } from './user'
+import { LinkType, MusicLink, Show } from '../../types'
 
 @Entity()
 export class Link {
@@ -13,7 +14,10 @@ export class Link {
   name: string
 
   @Column()
-  url: string
+  type: LinkType
+
+  @Column('jsonb')
+  data: string | Show[] | MusicLink[]
 
   @Column()
   userId: string
