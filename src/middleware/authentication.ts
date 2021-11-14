@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { authenticateUser } from '../queries/users'
+import { findByUserCredentials } from '../queries/users'
 import { UnauthorizedError } from './errorHandler'
 
 export default async (req: Request, res: Response, next: Function): Promise<void> => {
@@ -13,11 +13,11 @@ export default async (req: Request, res: Response, next: Function): Promise<void
     return next(new UnauthorizedError('Missing Authorization Header'))
   }
 
-  // verify auth credentials
+  // verify user credentials
   const base64Credentials = req.headers.authorization.split(' ')[1]
   const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii')
   const [username, password] = credentials.split(':')
-  const user = await authenticateUser(username, password)
+  const user = await findByUserCredentials(username, password)
   if (user === undefined) {
     return next(new UnauthorizedError('Invalid Authentication Credentials'))
   }

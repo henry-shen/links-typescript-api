@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
-import { presenter, userPresenter } from './presenter'
+import { presenter, getAllUserLinksPresenter } from './presenter'
 import { createLink } from '../queries/links'
-import { fetchUserLinks } from '../queries/users'
+import { findUser } from '../queries/users'
 import { NotFoundError, ServerError } from '../middleware/errorHandler'
 
 const fetchUserLinksCtrl = async (req: Request, res: Response, next: Function) => {
   try {
-    const user = await fetchUserLinks(req.params.username)
+    const user = await findUser(req.params.username, req.query?.sortBy?.toString())
     if (user === undefined) {
       return next(new NotFoundError('User not found.'))
     }
@@ -14,7 +14,7 @@ const fetchUserLinksCtrl = async (req: Request, res: Response, next: Function) =
     res.send({
       status: 200,
       message: 'Link created successfully',
-      result: userPresenter(user)
+      result: getAllUserLinksPresenter(user)
     })
   } catch (error) {
     return next(new ServerError('Database error.'))

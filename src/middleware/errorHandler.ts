@@ -46,11 +46,6 @@ class ServerError extends HTTPError {
 export const errorHandler = async (err: HTTPError | CustomError, req: Request, res: Response, next: Function) => {
   if (!(err instanceof HTTPError) && err.details !== undefined) {
     err = new InvalidRequestError(err.message ?? '', err.details)
-    // res.status(400).json({
-    //   status: 400,
-    //   message: err.message ?? '',
-    //   errors: err.details
-    // })
   } else if (!(err instanceof HTTPError)) {
     err = new ServerError('Unexpected Error.')
   }

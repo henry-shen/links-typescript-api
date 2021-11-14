@@ -1,8 +1,8 @@
-import {ILink, ILinks, MusicLink, Show} from '../types/index'
+import { ILink, ILinks, MusicLink, Show } from '../types/index'
 import { Link } from '../database/entities/link'
 import { User } from '../database/entities/user'
 
-const userPresenter = (user: User): ILinks => {
+const getAllUserLinksPresenter = (user: User): ILinks => {
   return {
     username: user.username,
     links: user.links.map((link) => presenter(link))
@@ -30,5 +30,5 @@ const presenter = (link: Link): ILink => {
 }
 
 export {
-  userPresenter, presenter
+  getAllUserLinksPresenter, presenter
 }

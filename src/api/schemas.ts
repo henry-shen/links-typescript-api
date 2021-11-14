@@ -3,6 +3,12 @@ import * as s from 'strummer'
 const fetchLinktreeSchema = {
   params: s.objectWithOnly({
     username: s.string()
+  }),
+  query: s.objectWithOnly({
+    sortBy: s.optional(s.enum({
+      type: 'string',
+      values: ['dateCreated']
+    }))
   })
 }
 

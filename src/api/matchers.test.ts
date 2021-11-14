@@ -1,9 +1,10 @@
 import * as s from 'strummer'
+import urlRegex from 'url-regex'
 
 describe('matcher url', () => {
   it('rejects a string', () => {
     expect(s.url().match('string')).toEqual([{
-      message: 'should be URL',
+      message: 'should be a URL',
       path: '',
       value: 'string'
     }])
@@ -23,13 +24,12 @@ describe('matcher url', () => {
     expect(s.url().match('htt://linktr.ee/linktree?id=123')).toEqual([])
   })
 
-  // it('does not handle an array of one', () => {
-  //   expect(region().match(['NZ'])).toEqual([
-  //     {
-  //       message: 'should be a valid enum value',
-  //       path: '',
-  //       value: ['NZ']
-  //     }
-  //   ])
-  // })
+  it('test', () => {
+    // const urlRegex = /[^(http://www.|https://www.|http://|https://)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
+
+    expect(urlRegex({ exact: true, strict: false }).test('https://google.com/api?34535/534534?dfg=g&fg')).toEqual(true)
+    expect(urlRegex({ exact: true, strict: false }).test('henry')).toEqual(false)
+    expect(urlRegex({ exact: true, strict: false }).test('henryhttps://google.us.edi?34535/534534?dfg=g&fg')).toEqual(false)
+    expect(urlRegex({ exact: true, strict: false }).test('gskinner.com/products/spl')).toEqual(true)
+  })
 })

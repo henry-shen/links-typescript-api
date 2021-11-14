@@ -32,7 +32,8 @@
     "strummer": "^2.10.0",
     "strummer-middleware": "^1.1.1",
     "swagger-ui-express": "^4.1.6",
-    "typeorm": "^0.2.40"
+    "typeorm": "^0.2.40",
+    "url-regex": "^5.0.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
