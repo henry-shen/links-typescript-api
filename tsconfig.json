@@ -9,7 +9,7 @@
     "typeRoots": [
       "./node_modules/@types",
       "./src/types",
-      "./src/types/strummer"
+      "./src/types/strummer/index.d.ts"
     ],
     "traceResolution": false,
     "experimentalDecorators": true,

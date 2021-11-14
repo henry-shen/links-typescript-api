@@ -12,4 +12,16 @@ const createLink = async (data: any) => {
   return await linkRepository.save(link)
 }
 
-export { createLink }
+const findLinksByUserIdSortedByDate = async (userId: string) => {
+  const linkRepository = getRepository(Link)
+  return await linkRepository.find({
+    where: {
+      userId: userId
+    },
+    order: {
+      createdAt: 'ASC'
+    }
+  })
+}
+
+export { createLink, findLinksByUserIdSortedByDate }

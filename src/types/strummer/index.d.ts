@@ -1,38 +1,102 @@
-interface IJSONSchema {
-  type: string
-  properties: object
-  required?: string[]
-  additionalProperties?: boolean
-}
-
-interface IMatcher {
-  match: (value: any) => any
-  toJSONSchema: () => IJSONSchema
-}
-
-interface IObjectWithOnlyMatcher {
-  [key: string]: IMatcher
-}
-
 declare module 'strummer' {
-  export function objectWithOnly (
-    object: IObjectWithOnlyMatcher,
-    options?: object
-  ): IMatcher
-  export function number (options?: object): IMatcher
-  export function integer (options?: object): IMatcher
-  export function string (options?: object): IMatcher
-  export function boolean (options?: object): IMatcher
-  export function isoDate (options?: object): IMatcher
-  export function array (options?: object): IMatcher
-  export function uuid (options?: object): IMatcher
-  export function url (options?: object): IMatcher
-  export function optional (matcher: IMatcher): IMatcher
-  export function oneOf (matcher: IMatcher[]): IMatcher
-  export function createMatcher ({ match }: { match: (path: string, value: any) => string | null }): any
-  export function hashmap (options?: object): IMatcher
+  interface MatchResult<T> {
+    message: string
+    path: string
+    value: T
+  }
 
-  function _enum (options?: object): IMatcher
+  interface MatchFn {
+    <T>(value: T): Array<MatchResult<T>>
+    <T>(path: string, value: T): Array<MatchResult<T>>
+  }
+  export interface Matcher {
+    match: MatchFn
+    safeParse: (
+      path: string,
+      value: string
+    ) => { errors: string[], value?: any }
+    toJSONSchema: () => JSONSchema
+  }
 
+  interface JSONSchema {
+    type: 'string'
+  }
+
+  interface CreateMatcherFactoryOpts {
+    optional?: boolean
+    initialize?: (opts?: { optional?: boolean }) => void
+    match: (path: string, value: any) => string | undefined
+    safeParse?: (
+      path: string,
+      value: string
+    ) => { errors: string[], value?: any }
+    toJSONSchema?: () => JSONSchema
+  }
+
+  export type MatcherFactory = () => Matcher
+
+  interface BaseOpts {
+    description?: string
+    optional?: boolean
+  }
+
+  interface ArrayOpts extends BaseOpts {
+    min?: number
+    max?: number
+    of: Matcher
+  }
+
+  interface BooleanOpts extends BaseOpts {
+    parse?: boolean
+  }
+
+  interface EnumOpts extends BaseOpts {
+    type?: 'integer' | 'string'
+    values: Array<string | number>
+  }
+
+  interface IsoDateOpts extends BaseOpts {
+    time?: boolean
+  }
+
+  interface IntegerOpts extends BaseOpts {
+    min?: number
+    max?: number
+    parse?: boolean
+  }
+
+  interface NumberOpts extends BaseOpts {
+    min?: number
+    max?: number
+    parse?: boolean
+  }
+
+  interface StringOpts extends BaseOpts {
+    min?: number
+    max?: number
+  }
+
+  interface UuidOpts extends BaseOpts {
+    version?: 1 | 2 | 3 | 4
+  }
+
+  type ObjectWithOnlyOpts = Record<string, Matcher>
+
+  export function array (opts: ArrayOpts): Matcher
+  export function boolean (opts?: BooleanOpts): Matcher
+  export function createMatcher (opts: CreateMatcherFactoryOpts): MatcherFactory
+
+  // enum is a protected name so requires special exporting
+  function _enum (opts: EnumOpts): Matcher
   export { _enum as enum }
+
+  export function integer (opts?: IntegerOpts): Matcher
+  export function isoDate (opts?: IsoDateOpts): Matcher
+  export function number (opts?: NumberOpts): Matcher
+  export function objectWithOnly (matchers: ObjectWithOnlyOpts): Matcher
+  export function oneOf (matchers: Matcher[]): Matcher
+  export function optional (matcher?: Matcher): Matcher
+  export function string (opts?: StringOpts): Matcher
+  export function url (opts?: never): Matcher
+  export function uuid (opts: UuidOpts): Matcher
 }

@@ -1,7 +1,7 @@
 import { User } from '../database/entities/user'
 import { getRepository } from 'typeorm'
 
-const findUser = async (username: string, sortBy: string | undefined) => {
+const findUser = async (username: string) => {
   const userRepository = getRepository(User)
   return await userRepository.findOne({
     where: {

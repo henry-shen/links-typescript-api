@@ -1,6 +1,7 @@
 import * as s from 'strummer'
+import { customURL } from './matchers'
 
-const fetchLinktreeSchema = {
+const fetchUserLinksSchema = {
   params: s.objectWithOnly({
     username: s.string()
   }),
@@ -17,7 +18,7 @@ const createClassicLinkSchema = {
     name: s.string({
       max: 144
     }),
-    data: s.url({})
+    data: customURL()
   })
 }
 
@@ -30,7 +31,8 @@ const createShowsLinkSchema = {
       of: s.objectWithOnly({
         date: s.isoDate({ time: false }),
         venue: s.string(),
-        available: s.string()
+        available: s.string(),
+        url: s.optional(customURL())
       })
     })
   })
@@ -44,12 +46,12 @@ const createMusicPlayerSchema = {
     data: s.array({
       of: s.objectWithOnly({
         platform: s.string(),
-        url: s.url({})
+        url: customURL()
       })
     })
   })
 }
 
 export {
-  fetchLinktreeSchema, createClassicLinkSchema, createShowsLinkSchema, createMusicPlayerSchema
+  fetchUserLinksSchema, createClassicLinkSchema, createShowsLinkSchema, createMusicPlayerSchema
 }

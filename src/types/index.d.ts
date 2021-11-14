@@ -13,7 +13,7 @@ export { Response } from 'express'
 export interface ILink {
   name: string
   type: LinkType
-  link?: string
+  url?: string
   shows?: Show[]
   musicLinks?: MusicLink[]
 }
@@ -24,6 +24,7 @@ export interface Show {
   date: string
   venue: string
   available: string
+  url?: string
 }
 
 export interface MusicLink {

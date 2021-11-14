@@ -1,5 +1,16 @@
 import * as s from 'strummer'
+import urlRegex from 'url-regex'
 
-const urlRegex = /[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/
-
-urlRegex.test('https://google.us.edi?34535/534534?dfg=g&fg')
+export const customURL = (): s.Matcher =>
+  s.createMatcher({
+    match: (path, url) => {
+      const boolean = urlRegex({ exact: true, strict: false }).test(url)
+      if (!boolean) return 'should be a URL'
+    },
+    toJSONSchema: () => {
+      return {
+        type: 'string',
+        format: 'url'
+      }
+    }
+  })()

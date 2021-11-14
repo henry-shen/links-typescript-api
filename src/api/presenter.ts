@@ -14,7 +14,7 @@ const presenter = (link: Link): ILink => {
     case 'classic': return {
       name: link.name,
       type: link.type,
-      link: link.data as string
+      url: link.data as string
     }
     case 'shows-list': return {
       name: link.name,
