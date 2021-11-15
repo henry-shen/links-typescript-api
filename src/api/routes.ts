@@ -1,6 +1,6 @@
 import express from 'express'
 import { fetchUserLinks, createLink } from './controller'
-import requestValidator from '../middleware/strummer'
+import requestValidator from '../middleware/requestValidator'
 import {
   fetchUserLinksSchema,
   createClassicLinkSchema,

@@ -6,6 +6,7 @@
   "scripts": {
     "build-windows": "rmdir /s /q build && tsc",
     "build": "rm -rf build && tsc",
+    "add-users": "ts-node src/scripts/addUsers.ts",
     "db:create": "src/database/create",
     "db:drop": "src/database/drop",
     "db:reset": "yarn db:drop && yarn db:create",

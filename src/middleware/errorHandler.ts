@@ -44,6 +44,7 @@ class ServerError extends HTTPError {
 }
 
 export const errorHandler = async (err: HTTPError | CustomError, req: Request, res: Response, next: Function) => {
+  // Handle errors coming from request validator
   if (!(err instanceof HTTPError) && err.details !== undefined) {
     err = new InvalidRequestError(err.message ?? '', err.details)
   } else if (!(err instanceof HTTPError)) {

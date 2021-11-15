@@ -1,43 +1,42 @@
-![alt text](https://github.com/henry-shen/typescript-api/blob/main/misc/image.png?raw=true)
+# Links API
 
-# The Problem
-We have three new link types for our users.
+## Infra required to run this API server
 
-1. Classic
-    - Titles can be no longer than 144 characters.
-    - Some URLs will contain query parameters, some will not.
-2. Shows List
-    - One show will be sold out.
-    - One show is not yet on sale.
-    - The rest of the shows are on sale.
-3. Music Player
-    - Clients will need to link off to each individual platform.
-    - Clients will embed audio players from each individual platform.
+-NodeJS (preferably the latest version but should work for Node 12 and onwards)
 
-You are required to create a JSON API that our front end clients will interact with.
-
-- The API can be GraphQL or REST.
-- The API can be written in your preferred language.
-- The client must be able to create a new link of each type.
-- The client must be able to find all links matching a particular userId.
-- The client must be able to find links matching a particular userId, sorted by dateCreated.
+-PostgreSQL
 
 
-## Your Solution
+## Getting started
 
-- Consider bad input data and the end user of your API - we're looking for good error handling and input validation.
-- If you are creating a GraphQL API, think about the access patterns the client may use, and think about the acces patterns the client may not use. Try not to [Yak Shave](https://seths.blog/2005/03/dont_shave_that/)
-- Consider extensibility, these are 3 of hundreds of potential link types that we will be developing.
+1. Install dependencies: ``yarn install``
+2. Standard PostgreSQL config already defined with host=127.0.0.1 and port=5432.
+   If you are using different config to this, please update this in src/config.ts
+   and src/database/create
+3. Create the database: ``yarn db:create``
+4. Add users to the users table ``yarn add-users``
+5. Start the server: ``yarn start``
+6. Hit the endpoints! 
 
 
-## Rules & Tips
+## Endpoints
 
-- Choose the language and environment of your choice, just include documentation on how to run your code.
-- Immutability and functional programming is looked upon favorably.
-- You cannot connect to a real world database - document your schema design.
-- Mocking third parties is looked upon favorably.
-- @todo comments are encouraged. You aren't expected to complete the challenge, but how you design your solution and your ideas for the future are important.
+The GET endpoints are public and has no auth.
 
----
-# Submission
-Set up your own remote git repository and make commits as you would in your day to day work. Submit a link to your repo when you're finished.
+``GET -> /users/:username `` fetch links by username
+
+``GET -> /users/:username?sortBy=dateCreated `` fetch links by username sorted by date created
+
+The POST endpoints below require user authentication (Basic Auth). After the server
+verifies the user, it will save the new link and user id to the database. 
+
+``POST -> /links/classic `` create classic link
+
+``POST -> /links/shows-list `` create shows list link
+
+``POST -> /links/music-player `` create music player link
+
+
+## Tests
+
+Tests can be run by using: ``yarn test``

@@ -1,14 +1,12 @@
 import * as path from 'path'
+import { config } from '../config'
 
 import { createConnection } from 'typeorm'
 
 export default createConnection({
   name: 'default',
   type: 'postgres',
-  url: 'postgres://@127.0.0.1:5432/links',
-  // ssl: {
-  //   rejectUnauthorized: false
-  // },
+  url: config.database.url,
   entities: [
     path.resolve(__dirname, 'entities', '*{.js,.ts}')
   ],
