@@ -13,6 +13,7 @@
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --fix --ext .ts src",
     "start": "nodemon src/server.ts",
+    "start-with-db": "nodemon src/server-with-db.ts",
     "test": "jest"
   },
   "repository": {

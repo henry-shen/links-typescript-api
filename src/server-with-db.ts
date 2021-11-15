@@ -4,6 +4,7 @@ import apiRouter from './api/routes'
 import cors from './middleware/cors'
 import authentication from './middleware/authentication'
 import { errorHandler } from './middleware/errorHandler'
+import createDatabaseConnection from './database/index'
 
 const app = express()
 const PORT = 8000
@@ -23,4 +24,4 @@ const server = () => {
   })
 }
 
-server()
+createDatabaseConnection.then(() => server())

@@ -1,7 +1,11 @@
 import { User } from '../database/entities/user'
 import { getRepository } from 'typeorm'
+import { mockFindCredentials, mockFindUser } from '../mocks/mocks'
+import { config } from '../config'
 
 const findUser = async (username: string) => {
+  if (config.useMockDatabase) return mockFindUser(username)
+
   const userRepository = getRepository(User)
   return await userRepository.findOne({
     where: {
@@ -10,12 +14,17 @@ const findUser = async (username: string) => {
   })
 }
 
-const findByUserCredentials = async (username: string, password: string) => {
+const findByUserCredentials = async (credentials: {
+  username: string
+  password: string
+}) => {
+  if (config.useMockDatabase) return mockFindCredentials(credentials)
+
   const userRepository = getRepository(User)
   return await userRepository.findOne({
     where: {
-      username: username,
-      password: password
+      username: credentials.username,
+      password: credentials.password
     }
   })
 }

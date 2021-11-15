@@ -17,7 +17,7 @@ export default async (req: Request, res: Response, next: Function): Promise<void
   const base64Credentials = req.headers.authorization.split(' ')[1]
   const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii')
   const [username, password] = credentials.split(':')
-  const user = await findByUserCredentials(username, password)
+  const user = await findByUserCredentials({ username, password })
   if (user === undefined) {
     return next(new UnauthorizedError('Invalid Authentication Credentials'))
   }
