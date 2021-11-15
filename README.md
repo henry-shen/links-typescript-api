@@ -1,10 +1,10 @@
 # Links API
 
-## Infra required to run this API server
+## What's required to run this API
 
 -NodeJS (preferably the latest version but should work for Node 12 and onwards)
 
--PostgreSQL
+-PostgreSQL (not required, see below)
 
 
 ## Getting started
@@ -15,14 +15,15 @@ Without database:
 2. Start the server: ``yarn start``
 3. Hit the endpoints!
 
-With database
+With database:
+
 1. Install dependencies: ``yarn install``
-2. Standard PostgreSQL config already defined with host=127.0.0.1 and port=5432.
+2. Default PostgreSQL config already defined with host=127.0.0.1 and port=5432.
    If you are using different config to this, please update this in src/config.ts
    and src/database/create
 4. Update useMockDatabase to 'false' in src/config.ts
 3. Create the database: ``yarn db:create``
-4. Add users to the users table ``yarn add-users``
+4. Add users to the user table: ``yarn add-users``
 5. Start the server: ``yarn start-with-db``
 6. Hit the endpoints! 
 

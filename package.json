@@ -1,7 +1,7 @@
 {
-  "name": "typescript-api",
+  "name": "links-typescript-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple API to create and view links",
   "main": "src/server.ts",
   "scripts": {
     "build-windows": "rmdir /s /q build && tsc",
