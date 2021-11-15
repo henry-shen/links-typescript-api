@@ -37,6 +37,7 @@ The GET endpoints are public and has no auth.
 
 The POST endpoints below require user authentication (Basic Auth). After the server
 verifies the user, it will save the new link and user id to the database.
+
 Authorization header: Basic YWRtaW46YWRtaW4=
 
 ``POST -> /links/classic `` create classic link
