@@ -50,10 +50,8 @@ const mockUser = {
   links: mockLinks
 }
 
-export const mockCreateLink = (type: string) => {
-  if (type === 'classic') return mockClassicLink as Link
-  else if (type === 'shows-list') return mockShowsList as Link
-  else return mockMusicPlayerLink as Link
+export const mockCreateLink = (name: string, type: string, data: string) => {
+  return { name, type, data } as Link
 }
 
 export const mockFindLinks = (userId: string) => {

@@ -4,7 +4,7 @@ import { mockCreateLink, mockFindLinks } from '../mocks/mocks'
 import { config } from '../config'
 
 const createLink = async (data: any) => {
-  if (config.useMockDatabase) return mockCreateLink(data.type)
+  if (config.useMockDatabase) return mockCreateLink(data.name, data.type, data.data)
 
   const link = new Link()
   link.name = data.name
