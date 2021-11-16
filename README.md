@@ -36,16 +36,24 @@ The GET endpoints are public and has no auth.
 
 ``GET -> /users/:username?sortBy=dateCreated `` fetch links by username sorted by date created
 
-The POST endpoints below require user authentication (Basic Auth). After the server
-verifies the user, it will save the new link and user id to the database.
+The POST endpoints below require Basic authorization in the Authorization header. See below
+After the server authenticates the user, it will save the new link and the userId to the database.
 
-Authorization header: Basic YWRtaW46YWRtaW4=
+``POST -> /links/classic`` create classic link
 
-``POST -> /links/classic `` create classic link
+``POST -> /links/shows-list`` create shows list link
 
-``POST -> /links/shows-list `` create shows list link
+``POST -> /links/music-player`` create music player link
 
-``POST -> /links/music-player `` create music player link
+## Authentication
+
+Basic Auth. Example below.
+
+Example user has username: `admin` and password: ``admin``
+
+Base64Encoded(userame:password): ``YWRtaW46YWRtaW4=``
+
+Include in the request headers: ``Authorization=Basic YWRtaW46YWRtaW4=``
 
 
 ## Tests
